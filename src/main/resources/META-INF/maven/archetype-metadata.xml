@@ -1,0 +1,38 @@
+<archetype-descriptor
+    xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd">
+	
+    
+	<requiredProperties>
+        <requiredProperty key="config-file-name">
+        	<defaultValue>${artifactId}</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="resource-name">
+            
+        </requiredProperty>
+
+        <!--JUnit version to use in generated project-->
+        <requiredProperty key="junit-version">
+            <defaultValue>4.10</defaultValue>
+        </requiredProperty>
+    </requiredProperties>
+    
+    
+    <fileSets>
+        <fileSet packaged="true" filtered="true">
+            <directory>src/main/java</directory>
+        </fileSet>
+        <fileSet>
+            <directory>src/test/java</directory>
+        </fileSet> 
+          <fileSet filtered="true" encoding="UTF-8">
+            <directory>src/config</directory>
+        </fileSet>      
+    </fileSets>
+    
+    
+
+    
+
+</archetype-descriptor>

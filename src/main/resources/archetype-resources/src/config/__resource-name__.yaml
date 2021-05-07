@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mobile-app-ws-deployment
+  namespace: mobile-app-ws
+  labels:
+    event: mobile-app-ws
+    name-space: mobile-app-ws
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      event: mobile-app-ws
+  template:
+    metadata:
+      labels:
+        event: mobile-app-ws
+    spec:
+      containers:
+        - image: jcpuerta1/archetype:latest
+          name: mobile-app-ws
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: JAVA_OPTS
+            value: '-Xmx512m -Xmx1024m -XX:+UseG1GC'
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: 200m
+            requests:
+              memory: 512Mi
+              cpu: 200m
+          ports:
+            - containerPort: 8080         
+      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mobile-app-ws-service
+  namespace: mobile-app-ws
+  labels:
+    event: mobile-app-ws
+    name-space: mobile-app-ws
+spec:
+  type: NodePort
+  ports:
+    -
+      port: 8080
+      targetPort: 8080 
+      nodePort: 32108
+  selector:
+    event: mobile-app-ws

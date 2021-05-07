@@ -1,0 +1,62 @@
+# See http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+spring:
+  thymeleaf.cache: false
+  main.show-banner: false
+  ## BD Management
+  datasource:
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+      schema: public
+    url:jdbc: postgresql://localhost:5433/demo_test
+    username: testuser
+    password: abc123
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none 
+#App configuration
+server:
+  address: 0.0.0.0
+  error:
+    include-message: always
+    include-binding-errors: always
+  port: 8085
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+    health:
+      status:
+        http-mapping:
+          down: 500
+      show-details: always
+  trace:
+    http:
+      include: request-headers,time-taken,session-id
+info:
+  #Revisar el @
+  project-version: '@project.version@'
+  build-timestamp: '@maven.build.timestamp@'
+
+#Hystrix Dashboard
+hystrix:
+  dashboard:
+    proxyStreamAllowList: '*'
+
+#Log Configuration
+log:
+  endPoint: http://localhost:8282
+  endPointConnectTimeout: 1000
+  endPointReadTimeout: 1000
+
+#Entiy Messages
+entity:
+  parameter1NotNull: 'parameter1 cannot be null'
+  parameter2NotNull: 'parameter2 cannot be null'
+  parameter3NotNull: 'parameter3 cannot be null'
+  parameter4NotNull: 'parameter4 cannot be null'
+  parameter4Size: 'parameter4 must be equal or greater than 8 characters and less than 16 characters'
+
+ 
